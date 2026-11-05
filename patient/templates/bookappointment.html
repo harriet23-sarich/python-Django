@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Appointment{% endblock %}
+
+{% block content %}     
+
+    <h2>Book Hospital Appointment</h2>
+
+    <form >
+        
+
+        <label>Patient Name:</label>
+        <input type="text" name="patient_name" required>
+        <br><br>
+
+        <label>Phone Number:</label>
+        <input type="text" name="phone" required>
+        <br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        <br><br>
+
+        <label>Department:</label>
+        <select name="department" required>
+            <option value="">Select Department</option>
+            <option value="General">General Medicine</option>
+            <option value="Dental">Dental</option>
+            <option value="Maternity">Maternity</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="Surgery">Surgery</option>
+        </select>
+        <br><br>
+
+        <label>Appointment Date:</label>
+        <input type="date" name="appointment_date" required>
+        <br><br>
+
+        <label>Appointment Time:</label>
+        <input type="time" name="appointment_time" required>
+        <br><br>
+
+        <label>Reason for Appointment:</label>
+        <textarea name="reason" rows="4" cols="30"></textarea>
+        <br><br>
+
+        <input type="submit" value="Book Appointment">
+
+    </form>
+{% endblock %}
