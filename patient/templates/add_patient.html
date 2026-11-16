@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Patient | MediCare Hospital</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+
+        body {
+            background-color: #f4f7fb;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header */
+        .page-header {
+            background: #172b4d;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+
+        .hospital-name {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .hospital-icon {
+            color: #20c997;
+            margin-right: 8px;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .form-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .form-header h3 {
+            color: #172b4d;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-header p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        .form-body {
+            padding: 30px;
+        }
+
+        /* Labels */
+        .form-label {
+            font-weight: 600;
+            color: #344054;
+            margin-bottom: 8px;
+        }
+
+        /* Inputs */
+        .form-control,
+        .form-select {
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            padding: 11px 13px;
+            min-height: 45px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #20c997;
+            box-shadow: 0 0 0 3px rgba(32, 201, 151, 0.12);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: #172b4d;
+            border-color: #172b4d;
+            padding: 10px 22px;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background-color: #29466e;
+            border-color: #29466e;
+        }
+
+        .btn-secondary {
+            padding: 10px 22px;
+            border-radius: 8px;
+        }
+
+        /* Required indicator */
+        .required {
+            color: #dc3545;
+        }
+
+        /* Error messages */
+        .text-danger {
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            color: #6c757d;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+    <div class="container">
+
+        <div class="hospital-name">
+            <i class="bi bi-heart-pulse-fill hospital-icon"></i>
+            MediCare Hospital
+        </div>
+
+    </div>
+</div>
+
+
+<!-- FORM -->
+<div class="container pb-5">
+
+    <div class="card form-card">
+
+        <!-- FORM HEADER -->
+        <div class="form-header">
+
+            <h3>
+                <i class="bi bi-person-plus me-2"></i>
+                Add New Patient
+            </h3>
+
+            <p>
+                Enter the patient's information below to create a new patient record.
+            </p>
+
+        </div>
+
+
+        <!-- FORM BODY -->
+        <div class="form-body">
+
+            <form action="" method="POST">
+
+                {% csrf_token %}
+
+                <div class="row">
+
+                    {% for field in form %}
+
+                        <div class="col-md-6 mb-4">
+
+                            <label class="form-label">
+                                {{ field.label }}
+
+                                {% if field.field.required %}
+                                    <span class="required">*</span>
+                                {% endif %}
+                            </label>
+
+                            {{ field }}
+
+                            {% if field.errors %}
+
+                                <div class="text-danger">
+                                    {{ field.errors }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- BUTTONS -->
+                <div class="d-flex justify-content-end gap-2 mt-3">
+
+                    <a href="javascript:history.back()"
+                       class="btn btn-secondary">
+
+                        <i class="bi bi-arrow-left me-1"></i>
+                        Cancel
+
+                    </a>
+
+                    <button type="submit" class="btn btn-primary">
+
+                        <i class="bi bi-person-plus me-1"></i>
+                        Add Patient
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+
+        <i class="bi bi-shield-check me-1"></i>
+
+        Patient information is handled securely.
+
+        <br>
+
+        © 2026 MediCare Hospital Management System
+
+    </div>
+
+</div>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

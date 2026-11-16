@@ -19,13 +19,18 @@ from django.urls import path
 from patient import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    
     path('index/',views.index,name="index"),
     path('login/', views.userlogin,name="login"),
     path('logout/', views.logout, name='logout'),
     path('dashboard/',views.dashboard,name="dashboard"),
     path('profile/',views.profile,name="profile"),
     path('bookappointment/',views.bookappointment,name="bookappointment"),
+    path('add_patient/', views.add_patient, name='add_patient'),
 
+    path('', views.dashboard, name='patient_list'),
+   path('view/<int:id>/', views.view_patient, name='view_patient'),
+    path('edit/<int:id>/', views.edit_patient, name='edit_patient'),
+    path('delete/<int:id>/', views.delete_patient, name='delete_patient'),
     
 ]

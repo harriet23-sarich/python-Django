@@ -4,18 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Illustration</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-</head>
-
-<body>
-  
-  
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard - Hospital Management</title>
 
     <!-- Bootstrap CSS -->
@@ -66,7 +54,7 @@
         .dashboard-card {
             border: none;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .card-icon {
@@ -83,7 +71,7 @@
         .profile-card {
             border: none;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .profile-image {
@@ -102,7 +90,7 @@
         .table-card {
             border: none;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .table th {
@@ -324,10 +312,10 @@
                             </small>
                         </div>
 
-                        <button class="btn btn-primary">
+                        <a href="{% url 'add_patient' %}" class="btn btn-primary">
                             <i class="bi bi-plus-circle me-1"></i>
                             Add Patient
-                        </button>
+                        </a>
 
                     </div>
 
@@ -360,11 +348,18 @@
 
                             <tbody>
 
+                                {% for patient in patients %}
+
                                 <tr>
-                                    <td>PAT-001</td>
-                                    <td>Alex Morgan</td>
-                                    <td>alex@gmail.com</td>
-                                    <td>0700123456</td>
+
+                                    <td>{{ patient.patient_id }}</td>
+
+                                    <td>{{ patient.name }}</td>
+
+                                    <td>{{ patient.email }}</td>
+
+                                    <td>{{ patient.phone_number }}</td>
+
                                     <td>
                                         <span class="badge bg-success">
                                             Active
@@ -372,45 +367,41 @@
                                     </td>
 
                                     <td>
-                                        <button class="btn btn-sm btn-outline-info">
+
+                                        <!-- VIEW -->
+                                        <a href="{% url 'view_patient' patient.id %}"
+                                           class="btn btn-sm btn-outline-info"
+                                           title="View Patient">
                                             <i class="bi bi-eye"></i>
-                                        </button>
+                                        </a>
 
-                                        <button class="btn btn-sm btn-outline-primary">
+                                        <!-- EDIT -->
+                                        <a href="{% url 'edit_patient' patient.id %}"
+                                           class="btn btn-sm btn-outline-primary"
+                                           title="Edit Patient">
                                             <i class="bi bi-pencil"></i>
-                                        </button>
+                                        </a>
 
-                                        <button class="btn btn-sm btn-outline-danger">
+                                        <!-- DELETE -->
+                                        <a href="{% url 'delete_patient' patient.id %}"
+                                           class="btn btn-sm btn-outline-danger"
+                                           title="Delete Patient">
                                             <i class="bi bi-trash"></i>
-                                        </button>
+                                        </a>
+
                                     </td>
+
                                 </tr>
+
+                                {% empty %}
 
                                 <tr>
-                                    <td>PAT-002</td>
-                                    <td>Jane Smith</td>
-                                    <td>jane@gmail.com</td>
-                                    <td>0711222333</td>
-                                    <td>
-                                        <span class="badge bg-success">
-                                            Active
-                                        </span>
-                                    </td>
-
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-info">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-
-                                        <button class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-pencil"></i>
-                                        </button>
-
-                                        <button class="btn btn-sm btn-outline-danger">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
+                                    <td colspan="6" class="text-center text-muted">
+                                        No patient records found.
                                     </td>
                                 </tr>
+
+                                {% endfor %}
 
                             </tbody>
 
@@ -419,6 +410,7 @@
                     </div>
 
                 </div>
+
             </div>
 
             <!-- FOOTER -->
@@ -437,12 +429,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-</html>
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
 </html>

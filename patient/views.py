@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout as auth_logout
-
+from patient.forms import PatientForm
+from patient.models import Patient
+from django.shortcuts import render, redirect, get_object_or_404
+from patient.models import Patient
+from patient.forms import PatientForm
 
 
 
@@ -43,7 +47,8 @@ def logout(request):
 # Dashboard
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    patients = Patient.objects.all()
+    return render(request, 'dashboard.html', {'patients': patients})
 
 
 # Profile
@@ -57,4 +62,51 @@ def profile(request):
 def bookappointment(request):
     return render(request, 'bookappointment.html')
 
+def add_patient(request):
+    if request.method == 'POST':
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = PatientForm()
+    return render(request, 'add_patient.html', {'form': form})  
+
+def view_patient(request, id):
+    patient = get_object_or_404(Patient, id=id)
+
+    return render(request, 'view_patient.html', {
+        'patient': patient
+    })
+
+
+def edit_patient(request, id):
+    patient = get_object_or_404(Patient, id=id)
+
+    if request.method == 'POST':
+        form = PatientForm(request.POST, instance=patient)
+
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+
+    else:
+        form = PatientForm(instance=patient)
+
+    return render(request, 'edit_patient.html', {
+        'form': form,
+        'patient': patient
+    })
+
+
+def delete_patient(request, id):
+    patient = get_object_or_404(Patient, id=id)
+
+    if request.method == 'POST':
+        patient.delete()
+        return redirect('dashboard')
+
+    return render(request, 'delete_patient.html', {
+        'patient': patient
+    })
 
