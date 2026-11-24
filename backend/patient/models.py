@@ -12,3 +12,13 @@ class Patient(models.Model):
 
     def __str__(self):
         return self.patient_id   
+
+
+class Payment(models.Model):
+    patientname = models.CharField(max_length=100)
+    account = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_date = models.DateTimeField(auto_now_add=True)
+    transaction_id = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return f"Payment{self.transaction_id} for {self.patientname}"
